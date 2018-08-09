@@ -2,7 +2,7 @@
 
  <h3> wordpress를 이용한 컨텐츠 업로드 + 관리 페이지 제작 </h3>
 
- <div style="text-align: right"> 작성자 : 김지희
+ <div style="text-align: right"> 작성자 : 김지희 </div>
 
 
  #### 목차
@@ -37,7 +37,7 @@
    - installed_plugin = PHP code snippets (Insert PHP), WP Mail SMTP
 
 - 목적
-    <Br> backend 로 php를 frontend 로 wordpress를 이용하고 업로드 페이지에서 업로드 된 동영상에 대한 정보를 MySQL database와 서버로부터 받아와서 table 형식으로 확인할 수 있는 페이지를 제작한다.  
+    <Br> backend 로 php를 frontend 로 wordpress를 이용하고 업로드 페이지에서 업로드 된 동영상에 대한 정보를 MySQL database와 서버로부터 받아와서 table 형식으로 확인할 수 있는 페이지를 제작
 
 <br>
 
@@ -47,24 +47,27 @@
 #####  기존의 wordpress database에 uploaded_video table 생성
 <center><img src="https://i.imgur.com/FfkngQB.png" width=50%/></center>
 
- video_id 가 primary key 이고 file 업로더인 author 가 wp_users 의 user_login 칼럼을 참조하며 status 에 defualt로 'uploaded' 를 할당한다.
+ video_id 가 primary key 이고 file 업로더인 author 가 wp_users 의 user_login 칼럼을 참조하며 status 에 defualt로 'uploaded' 를 할당
 
 
 ##### PDO 를 이용하여 file upload 시 database에 insert
-1. form data로 받아 온 file 정보를 parsing한 후 파일 이름, 파일이 저장되는 위치, 파일 크기, 업로더, 업로드 한 시간, 파일 형식 정보를 새로 생성한 table 에 저장한다.  
-2. Database 연결 및 실행은 PHP database access object 인 PDO 를 이용하고 stmt 변수에 insert query문을 준비한 뒤 file이 업로드 될 때마다 실행되도록 구현했다.  
+1. form data로 받아 온 file 정보를 parsing한 후 파일 이름, 파일이 저장되는 위치, 파일 크기, 업로더, 업로드 한 시간, 파일 형식 정보를 새로 생성한 table 에 저장
+2. Database 연결 및 실행은 PHP database access object 인 PDO 를 이용하고 stmt 변수에 insert query문을 준비한 뒤 file이 업로드 될 때마다 실행되도록 구현
 
 ##### upload 된 video 의 thumbnail 생성
 1. thumbnail 생성을 위해 ffmpeg 프로그램 설치
-insert query 를 실행힌 후 해당 비디오의 재생 후 5초의 이미지를 썸네일로 비디오와 같은 위치에 같은 이름으로 확장자만 png 로 변경하여 저장한다.
+insert query 를 실행힌 후 해당 비디오의 재생 후 5초의 이미지를 썸네일로 만들어 비디오와 같은 위치에 같은 이름으로 확장자만 png 로 변경하여 저장
 
 
 
 
 ##### database 정보를 받아와 table 생성
 1. cookies 조회 결과 cookie name 이 wordpress_logged_in으로 시작하는 cookie 의 value를 파싱하여 현재 로그인 되어있는 username을 알아낼 수 있음을 확인
+
 2. username으로 database의 wp_users table에서 user name에 해당하는 ID 쿼리(위의 ERD 참고)
+
 3. wp_uploaded_video 에서 author과 username이 동일한 rows 쿼리
+
 4. php 코드로 table을 생성하기 위해 echo 이용
  ```PHP
  echo '<table>';
@@ -109,8 +112,9 @@ insert query 를 실행힌 후 해당 비디오의 재생 후 5초의 이미지�
 - 해결 방안 : directory 권한 수정
 
      ```bash
-    foo@bar$ chmod -R 755 upload되는 폴더 Path/
+    foo@bar$ chmod -R 775 upload되는 폴더 Path/
     ```
+  file upload는 `755` 로 권한을 수정해도 문제 없지만 이후 삭제 기능 구현을 위해 `775` 로 수정  
 
  3. 썸네일 생성 시 shell_exec 함수 허용
   - issue : ffmpeg 이용 시 shell 에서 작동하지만 php 파일에서 shell exec 작동이 안되는 에러 발생
@@ -145,7 +149,7 @@ insert query 를 실행힌 후 해당 비디오의 재생 후 5초의 이미지�
 
     <center>    <img src = "https://i.imgur.com/p1YMBhR.png" width=80%/> </center>
 
-     다음과 같이 변경된 것을 확인할 수 있다.
+     다음과 같이 변경된 것 확인 가능
 <br>
 
 ### 5. 프로젝트 후기
