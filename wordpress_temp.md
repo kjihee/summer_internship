@@ -13,7 +13,7 @@
 
 ##### 3. 구현 결과
 
-##### 4. Issue 발생 및 해결방안
+##### 4. Issue 발생 및 해결 방안
 
 ##### 5. 프로젝트 후기
 
@@ -83,21 +83,21 @@ insert query 를 실행힌 후 해당 비디오의 재생 후 5초의 이미지�
  ```
 
 
-<br>
+
 ### 3. 구현 결과
 
 ##### MySQL database 출력 결과
-화면 에는 현재 접속한 user가 올린 video 중 status가 'delete'가 아닌 것만 출력<br>
+화면 에는 현재 접속한 user가 올린 video 중 status가 'delete'가 아닌 것만 출력
+
 <center><img src = "https://i.imgur.com/xR9sfh4.png"> </center>
 
 ##### cookie 를 이용 해당 user가 올린 비디오 리스트 출력
-<center><img src="https://i.imgur.com/67I9Akj.png" width=70%/>
-<br><h5>user: user1<br>
-<img src="https://i.imgur.com/1su4TM2.png" width=70%/>
-<br>user: jihee <br>
-</center>
+<center><img src="https://i.imgur.com/67I9Akj.png" width=70%/></center>
+<center><br><h5>user: user1</h5><br></center>
+<center><img src="https://i.imgur.com/1su4TM2.png" width=70%/></center>
+<center><br><h5>user: jihee <br></h5></center>
 
-### 4. Issue 발생 및 해결방법 기록
+### 4. Issue 발생 및 해결 방안
 
  1. custom page에 snaptube theme 적용하기
   - issue : wordpress에 새로운 page를 추가하기 위해 ``/var/www/html/wp-content/plugins/theme/snaptube/`` 경로에 php 코드를 추가하여 page를 만들면 snaptube theme가 적용되지 않는 issue 발생
@@ -145,7 +145,7 @@ insert query 를 실행힌 후 해당 비디오의 재생 후 5초의 이미지�
 
     <center>    <img src = "https://i.imgur.com/p1YMBhR.png" width=80%/> </center>
 
-        다음과 같이 변경된 것을 확인할 수 있다.
+     다음과 같이 변경된 것을 확인할 수 있다.
 <br>
 
 ### 5. 프로젝트 후기
