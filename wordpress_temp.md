@@ -45,7 +45,8 @@
 ###  2.  video list 페이지 구현 정보
 
 #####  기존의 wordpress database에 uploaded_video table 생성
-<center><img src="https://i.imgur.com/FfkngQB.png" width=50%/> </center>
+<center><img src="https://i.imgur.com/FfkngQB.png" width=50%/></center>
+
  video_id 가 primary key 이고 file 업로더인 author 가 wp_users 의 user_login 칼럼을 참조하며 status 에 defualt로 'uploaded' 를 할당한다.
 
 
@@ -87,13 +88,15 @@ insert query 를 실행힌 후 해당 비디오의 재생 후 5초의 이미지�
 
 ##### MySQL database 출력 결과
 화면 에는 현재 접속한 user가 올린 video 중 status가 'delete'가 아닌 것만 출력<br>
-<center><img src = "https://i.imgur.com/xR9sfh4.png">
+<center><img src = "https://i.imgur.com/xR9sfh4.png"> </center>
+
 ##### cookie 를 이용 해당 user가 올린 비디오 리스트 출력
 <center><img src="https://i.imgur.com/67I9Akj.png" width=70%/>
 <br><h5>user: user1<br>
 <img src="https://i.imgur.com/1su4TM2.png" width=70%/>
 <br>user: jihee <br>
 </center>
+
 ### 4. Issue 발생 및 해결방법 기록
 
  1. custom page에 snaptube theme 적용하기
@@ -112,12 +115,12 @@ insert query 를 실행힌 후 해당 비디오의 재생 후 5초의 이미지�
  3. 썸네일 생성 시 shell_exec 함수 허용
   - issue : ffmpeg 이용 시 shell 에서 작동하지만 php 파일에서 shell exec 작동이 안되는 에러 발생
   - 해결 방안 : 권한 문제 해결
-  ```bash
-  foo@bar$ sudo chown www-data:www-data -R 썸네일 만들어지는 폴더 Path/
-  foo@bar$ sudo vi /etc/sudoers
-  # www-data ALL=NOPASSWD: ALL 주석을 풀어 sudoers 의 마지막 줄에 추가
-  # syntax error 주의
-  ```
+    ```bash
+    foo@bar$ sudo chown www-data:www-data -R 썸네일 만들어지는 폴더 Path/
+    foo@bar$ sudo vi /etc/sudoers
+    # www-data ALL=NOPASSWD: ALL 주석을 풀어 sudoers 의 마지막 줄에 추가
+    # syntax error 주의
+    ```
 
  4. 사용자 화면 수정
   - issue : 리스트에서 사용자가 볼 때 불필요한 정보를 삭제하고 ui 수정
@@ -128,21 +131,21 @@ insert query 를 실행힌 후 해당 비디오의 재생 후 5초의 이미지�
   - 해결 방안 : php.ini 파일에서 post_max_size 수정
 
      ```
-  ; Maximum size of POST data that PHP will accept.
-  ; Its value may be 0 to disable the limit. It is ignored if POST data reading
-  ; is disabled through enable_post_data_reading.
-  ; http://php.net/post-max-size
-  post_max_size = 10000M
-```
-   저장 후 apche2 재시작
-```
-    foo@bar$ sudo systemctl restart apache2
-```
-   재시작한 후 wordpress의 dashboard>media>add new 페이지 접속 시
+    ; Maximum size of POST data that PHP will accept.
+    ; Its value may be 0 to disable the limit. It is ignored if POST data reading
+    ; is disabled through enable_post_data_reading.
+    ; http://php.net/post-max-size
+    post_max_size = 10000M
+      ```
+     저장 후 apche2 재시작
+    ```
+      foo@bar$ sudo systemctl restart apache2
+    ```
+     재시작한 후 wordpress의 dashboard>media>add new 페이지 접속 시
 
-   <img src = "https://i.imgur.com/p1YMBhR.png" width=80%/>
+    <center>    <img src = "https://i.imgur.com/p1YMBhR.png" width=80%/> </center>
 
-   다음과 같이 변경된 것을 확인할 수 있다.
+        다음과 같이 변경된 것을 확인할 수 있다.
 <br>
 
 ### 5. 프로젝트 후기
