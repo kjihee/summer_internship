@@ -3,7 +3,7 @@
 
  <h3> Relocating File App using Redis+MySQL+Flask+asyncio
  (Redis+MySQL+Flask 를 이용한 비동기 파일 재배치 프로그램)   
-
+</h3>
  <div style="text-align: right"> 작성자 : 김지희
 
 
@@ -21,7 +21,7 @@
 <Br>
 -----------
 
- <h3> 1. 프로젝트 개요
+ <h3> 1. 프로젝트 개요 </h3>
 
 - 프로젝트 기간
  <br> 2018.07.24 ~ 2018.08.02
@@ -54,7 +54,7 @@
 )
 2. db_query 모듈을 이용하여 database의 contents table 과 level table에서 post 된 cid를 가진 content의 현재위치와 목적위치를 반환한다.
 
-<strong>contents table
+<strong>contents table </strong>
 <br>
 
 | cid | content_level | filename | generate_time       | update_time         |
@@ -65,7 +65,7 @@
 | 4   | bronze        | d.mp4    | 2018-07-29 15:31:24 | 2018-08-01 16:25:19 |
 | 5   | silver        | e.mp4    | 2018-07-29 15:31:25 | 2018-08-02 18:30:18 |
 <br>
-<strong> level table
+<strong> level table </strong>
 <br>
 
 | content_level | max_counts | path                                                | min_counts |
