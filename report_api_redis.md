@@ -4,12 +4,13 @@
  <h3> Relocating File App using Redis+MySQL+Flask+asyncio
  (Redis+MySQL+Flask 를 이용한 비동기 파일 재배치 프로그램)   
 </h3>
- <div style="text-align: right"> 작성자 : 김지희
+ <div style="text-align: right"> 작성자 : 김지희 </div>
 
+<br>
 
- ### 목차
+<h3> 목차 </h3>
 
- ##### 1. 프로젝트 개요
+##### 1. 프로젝트 개요
 
 ##### 2. API 기능 설명 및 구현 상세 정보
 
@@ -18,8 +19,9 @@
 ##### 4. issue 발생 및 해결방법 기록
 
 ##### 5. 프로젝트 후기
-<Br>
------------
+
+<br>
+--------------------
 
  <h3> 1. 프로젝트 개요 </h3>
 
@@ -112,7 +114,8 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
 만약 status 가 'done' 이 아니면 "check your status again" 메세지를 반환한다.
 
 
-<br>
+
+
 ### 3. 구현 결과
 ##### 컨텐츠 정보 쿼리 및 redis 업데이트
     foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
@@ -129,7 +132,7 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
 <img src="https://i.imgur.com/4EiSSFO.png" width=60%/>    
 redis status check 후 db update 결과
 
-<br>
+
 ### 4. Issue 발생 및 해결방법 기록
  1. 디렉터리 쓰기 권한 설정
   - issue : 파일이 이동해야 하는 route가 사용자에게 쓰기 권한이 없을 경우 파일 이동 시 'permission denied' 에러 발생
@@ -185,7 +188,8 @@ redis status check 후 db update 결과
   ```
 
 
-<Br>
+</Br>
+
 ### 5. 프로젝트 후기
 ##### 개선할점
 - scalability와 유지보수 를 고려하여 하드코딩, 반복되는 코드를 최소화 해야한다.
