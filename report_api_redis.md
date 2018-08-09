@@ -1,5 +1,6 @@
  ## Summer Internship 3rd Project
 
+
  <h3> Relocating File App using Redis+MySQL+Flask+asyncio
  (Redis+MySQL+Flask 를 이용한 비동기 파일 재배치 프로그램)   
 
@@ -12,7 +13,7 @@
 
 ##### 2. API 기능 설명 및 구현 상세 정보
 
-##### 3. 구현 결과
+##### 3. 구현 결과  
 
 ##### 4. issue 발생 및 해결방법 기록
 
@@ -42,7 +43,7 @@
 
 
 -  Data Flow Diagram
-<center><img src="https://i.imgur.com/R9tYWCK.png" width="90%" /></center>
+<center><img src="https://i.imgur.com/O13rEFI.png" width="90%" /></center>
 
 
 <Br>
@@ -53,23 +54,63 @@
 )
 2. db_query 모듈을 이용하여 database의 contents table 과 level table에서 post 된 cid를 가진 content의 현재위치와 목적위치를 반환한다.
 
-<strong>contents
+<strong>contents table
 <br>
-<img src="https://i.imgur.com/L8I5vfa.png" width="60%" />
-<br>
-level
-<br>
-<img src="https://i.imgur.com/OArMB1b.png " width="70%" />  
 
-(e.g.)
-{'3':{"cid": "3", "count": "664", "target": "bronze", "db_level": "silver",
-"filename": "c.mp4", "worker_id": null, "status": "update"}} 형식으로 저장된다.
+| cid | content_level | filename | generate_time       | update_time         |
+|-----|---------------|----------|---------------------|---------------------|
+| 1   | gold          | a.mp4    | 2018-07-29 15:31:24 | 2018-08-02 18:30:17 |
+| 2   | bronze        | b.mp4    | 2018-07-29 15:31:24 | 2018-08-02 10:47:40 |
+| 3   | silver        | c.mp4    | 2018-07-29 15:31:24 | 2018-08-02 18:30:18 |
+| 4   | bronze        | d.mp4    | 2018-07-29 15:31:24 | 2018-08-01 16:25:19 |
+| 5   | silver        | e.mp4    | 2018-07-29 15:31:25 | 2018-08-02 18:30:18 |
+<br>
+<strong> level table
+<br>
+
+| content_level | max_counts | path                                                | min_counts |
+|---------------|------------|-----------------------------------------------------|------------|
+| bronze        | 999        | /etc/inisoft/redis_project/bronze/                  | 0          |
+| gold          | 3001       | /home/inisoft/workspace/inisoft/redis_project/gold/ | 2000       |
+| silver        | 1999       | /var/www/html/redis_project/silver/                 | 1000       |
+
+
+* **URL**
+  /post_sentence
+
+* **Method:**
+
+  `POST`
+
+*  **URL Params**
+
+ * **Data Params**
+
+    `{cid:7&count=664}`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:**
+
+    `{"cid": "7", "count": "1964", "target": "silver", "db_level": "bronze",
+    "filename": "g.mp4", "worker_id": null, "status": "update"}`
+
+* **Sample Call:**
+```
+foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
+{"cid": "7", "count": "1964", "target": "silver", "db_level": "bronze",
+"filename": "g.mp4", "worker_id": null, "status": "update"}
+```
+
+
 
 ##### redis 값 체크 및 MySQL database 업데이트(DFD step6 ~ step8)
 1. worker가 파일을 재배치한 후 해당 contents 의 status 를 'done' 으로 바꾸고 API 를 호출한다. (e.g. curl http://192.168.10.108:5000/update_sentence -d "cid=3"
 )
 2. request를 받으면 cid 를 Key 값으로 redis에서 해당 content의 status 가 'done' 인지 검사하고 MySQL의 contents table 에 새로운 level 과 update time 을 업데이트한다.
 만약 status 가 'done' 이 아니면 "check your status again" 메세지를 반환한다.
+
 
 <br>
 ### 3. 구현 결과
