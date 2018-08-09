@@ -128,9 +128,10 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
   7
   foo@bar:~/$ curl http://192.168.10.108:5000/update_sentence -d "cid=8"
   check your status again
-```
+   ```
 
   <img src="https://i.imgur.com/4EiSSFO.png" width=60%/>    
+
   redis status check 후 db update 결과
 
 
