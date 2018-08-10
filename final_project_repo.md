@@ -45,7 +45,7 @@
 
 <h4> 1) 컨텐츠 정보 쿼리 및 redis 업데이트(Process step1 ~ step3) </h4>
 
-** API Specification **
+<strong> API Specification </strong>
 
 * **URL**
   /post_sentence
@@ -87,7 +87,7 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
 
 
 
-** 기능 설명 **
+##### 기능 설명 
 
 1. 사용자가 컨텐츠를 조회하면 컨텐츠의 cid 와 count 정보를 포함하여 API를 호출한다. (e.g.curl http://192.168.10.108:5001/post_sentence -d "cid=3&count=664"
 )
@@ -116,7 +116,7 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
 <br>
 #### 2) redis 값 체크 및 MySQL database 업데이트(DFD step6 ~ step8)
 
-** API Specification **
+<strong> API Specification </strong>
 
 * **URL**
   /update_sentence
@@ -156,7 +156,7 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
   check your status again
    ```
 
-** 기능 설명 **
+##### 기능 설명 
 
  1. worker가 파일을 재배치한 후 해당 contents 의 status 를 'done' 으로 바꾸고 API 를 호출한다. (e.g. curl http://192.168.10.108:5000/update_sentence -d "cid=3"
 )
