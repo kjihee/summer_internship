@@ -113,6 +113,7 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
 | gold          | 3001       | /home/inisoft/workspace/inisoft/redis_project/gold/ | 2000       |
 | silver        | 1999       | /var/www/html/redis_project/silver/                 | 1000       |
 
+</br>
 
 #### 2) redis 값 체크 및 MySQL database 업데이트(DFD step6 ~ step8)
 
@@ -163,9 +164,10 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
  2. request를 받으면 cid 를 Key 값으로 redis에서 해당 content의 status 가 'done' 인지 검사하고 MySQL의 contents table 에 새로운 level 과 update time 을 업데이트한다.
 만약 status 가 'done' 이 아니면 "check your status again" 메세지를 반환한다.
 
-   <img src="https://i.imgur.com/4EiSSFO.png" width=60%/>    
-     <h5>redis status check 후 content_level과 update_time update 결과</h5>
+   <h5>redis status check 후 content_level과 update_time update 결과</h5>
 
+   <img src="https://i.imgur.com/4EiSSFO.png" width=60%/>    
+     
 
 
 <div id="worker"><h2>3. Worker</h2></div>
