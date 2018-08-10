@@ -38,15 +38,25 @@
    <Br> 사용자와 worker가 단 한번의 명령으로 MySQL, redis-server 의 정보를 받아오거나 업데이트하는 기능을 이용할 수 있는 인터페이스를 제공한다.
 
 
--  Data Flow Diagram
+-  Process
 <center><img src="https://lh3.googleusercontent.com/-JdByGuC9heU/W2v01LrAXoI/AAAAAAAAEvY/-X_-pgPx32gi4CEBIydUC2988TBYOYtPACL0BGAYYCw/h591/2018-08-09.png" width="90%" /></center>
 
 
-<Br>
-<h3>  2. API 구현 정보 </h3>
+### 2. API 기능 설명 및 구현 상세 정보
 
-<h4> 1) 컨텐츠 정보 쿼리 및 redis 업데이트(DFD step2 ~ step3) </h4>
+### 개발 환경
+- OS : ubutu 16.04
+- python==3.6.5
+- MySQL==5.7
+- Flask==1.0.2
+- PyMySQL==0.9.2
+- redis-server==4.0.10
 
+### 프로세스 상세 및 실행 결과
+
+<h4> 1) 컨텐츠 정보 쿼리 및 redis 업데이트(Process step1 ~ step3) </h4>
+
+<strong> API Specification </strong>
 
 * **URL**
   /post_sentence
@@ -55,13 +65,13 @@
 
   `POST`
 
- * **Data Params**
+* **Data Params**
 
-    `{cid:7&count=664}`
+    `{cid=7&count=664}`
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** `200` <br />
   *  **Content:**
 
     `{"cid": "7", "count": "1964", "target": "silver", "db_level": "bronze",
@@ -69,14 +79,14 @@
 
 * **Faults Response:**
 
-  * **Code:** 404 <br />
+  * **Code:** `404` <br />
   *  **Content:**
-   - Not found
-   - Non existent URI
+     - Not found
+     - Non existent URI
 
-  * **Code:** 500 <br />
+  * **Code:** `500` <br />
   *  **Content:**
-   - Internal Server error (MySQL, Redis-server error etc.)
+     - Internal Server error (MySQL, Redis-server error etc.)
 
 
 * **Sample Call:**
@@ -84,8 +94,11 @@
 foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
 {"cid": "7", "count": "1964", "target": "silver", "db_level": "bronze",
 "filename": "g.mp4", "worker_id": null, "status": "update"}
-```
+```   
 
+
+
+<strong> 기능 설명 </strong>
 
 1. 사용자가 컨텐츠를 조회하면 컨텐츠의 cid 와 count 정보를 포함하여 API를 호출한다. (e.g.curl http://192.168.10.108:5001/post_sentence -d "cid=3&count=664"
 )
@@ -101,7 +114,7 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
 | 3   | silver        | c.mp4    | 2018-07-29 15:31:24 | 2018-08-02 18:30:18 |
 | 4   | bronze        | d.mp4    | 2018-07-29 15:31:24 | 2018-08-01 16:25:19 |
 | 5   | silver        | e.mp4    | 2018-07-29 15:31:25 | 2018-08-02 18:30:18 |
-<br>
+
 <strong> level table </strong>
 <br>
 
@@ -111,10 +124,11 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
 | gold          | 3001       | /home/inisoft/workspace/inisoft/redis_project/gold/ | 2000       |
 | silver        | 1999       | /var/www/html/redis_project/silver/                 | 1000       |
 
-
-
+</br>
 
 #### 2) redis 값 체크 및 MySQL database 업데이트(DFD step6 ~ step8)
+
+<strong> API Specification </strong>
 
 * **URL**
   /update_sentence
@@ -123,27 +137,27 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
 
   `POST`
 
- * **Data Params**
+* **Data Params**
 
-    `{cid:7}`
+  `{cid:7}`
 
 * **Success Response:**
 
-  * **Code:** 200 <br />
+  * **Code:** `200` <br />
   *  **Content:**
     `7`
 
 
 * **Faults Response:**
 
-  * **Code:** 404 <br />
+  * **Code:** `404` <br />
   *  **Content:**
-   - Not found
-   - Non existent URI
+     - Not found
+     - Non existent URI
 
-* **Code:** 500 <br />
-*  **Content:**
- - Internal Server error (MySQL, Redis-server error etc.)
+  * **Code:** `500` <br />
+  *  **Content:**
+     - Internal Server error (MySQL, Redis-server error etc.)
 
 * **Sample Call:**
 
@@ -154,15 +168,18 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
   check your status again
    ```
 
+<strong> 기능 설명 </strong>
 
  1. worker가 파일을 재배치한 후 해당 contents 의 status 를 'done' 으로 바꾸고 API 를 호출한다. (e.g. curl http://192.168.10.108:5000/update_sentence -d "cid=3"
 )
  2. request를 받으면 cid 를 Key 값으로 redis에서 해당 content의 status 가 'done' 인지 검사하고 MySQL의 contents table 에 새로운 level 과 update time 을 업데이트한다.
 만약 status 가 'done' 이 아니면 "check your status again" 메세지를 반환한다.
 
-   <img src="https://i.imgur.com/4EiSSFO.png" width=60%/>    
+   <h5>redis status check 후 content_level과 update_time update 결과</h5>
 
-  <strong>redis status check 후 db update 결과</strong>
+   <img src="https://i.imgur.com/4EiSSFO.png" width=60%/>    
+     
+
 
 
 
