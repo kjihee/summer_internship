@@ -164,7 +164,7 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
 만약 status 가 'done' 이 아니면 "check your status again" 메세지를 반환한다.
 
    <img src="https://i.imgur.com/4EiSSFO.png" width=60%/>    
-  <strong>redis status check 후 content_level과 update_time update 결과</strong>
+     <h5>redis status check 후 content_level과 update_time update 결과</h5>
 
 
 
