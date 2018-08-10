@@ -4,6 +4,7 @@
  <h3> Relocating File program using Redis+MySQL+Flask+asyncio
  (Redis+MySQL+Flask 를 이용한 비동기 파일 재배치 프로그램)   
 </h3>
+
  <div style="text-align: right"> 작성자 : 김지희 </div>
 
 <br>
@@ -44,7 +45,7 @@
 <Br>
 <h3>  2. API 구현 정보 </h3>
 
-<h4> 컨텐츠 정보 쿼리 및 redis 업데이트(DFD step2 ~ step3) </h4>
+<h4> 1) 컨텐츠 정보 쿼리 및 redis 업데이트(DFD step2 ~ step3) </h4>
 
 
 * **URL**
@@ -113,7 +114,7 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
 
 
 
-#### redis 값 체크 및 MySQL database 업데이트(DFD step6 ~ step8)
+#### 2) redis 값 체크 및 MySQL database 업데이트(DFD step6 ~ step8)
 
 * **URL**
   /update_sentence
@@ -142,7 +143,7 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
 
 * **Code:** 500 <br />
 *  **Content:**
- - Internal Server error (MySQL, Redis-server etc.)
+ - Internal Server error (MySQL, Redis-server error etc.)
 
 * **Sample Call:**
 
@@ -159,11 +160,9 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
  2. request를 받으면 cid 를 Key 값으로 redis에서 해당 content의 status 가 'done' 인지 검사하고 MySQL의 contents table 에 새로운 level 과 update time 을 업데이트한다.
 만약 status 가 'done' 이 아니면 "check your status again" 메세지를 반환한다.
 
-
-
    <img src="https://i.imgur.com/4EiSSFO.png" width=60%/>    
 
-  redis status check 후 db update 결과
+  <strong>redis status check 후 db update 결과</strong>
 
 
 
