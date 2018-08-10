@@ -70,12 +70,12 @@
 
   * **Code:** `404` <br />
   *  **Content:**
-   - Not found
-   - Non existent URI
+     - Not found
+     - Non existent URI
 
   * **Code:** `500` <br />
   *  **Content:**
-   - Internal Server error (MySQL, Redis-server error etc.)
+     - Internal Server error (MySQL, Redis-server error etc.)
 
 
 * **Sample Call:**
@@ -141,12 +141,12 @@ foo@bar:~/$ curl http://192.168.10.108:5000/post_sentence -d "cid=7&count=1964"
 
   * **Code:** `404` <br />
   *  **Content:**
-   - Not found
-   - Non existent URI
+     - Not found
+     - Non existent URI
 
   * **Code:** `500` <br />
   *  **Content:**
-   - Internal Server error (MySQL, Redis-server error etc.)
+     - Internal Server error (MySQL, Redis-server error etc.)
 
 * **Sample Call:**
 
