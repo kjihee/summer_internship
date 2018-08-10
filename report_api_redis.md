@@ -2,8 +2,7 @@
 
 
  <h3> Relocating File program using Redis+MySQL+Flask+asyncio
- (Redis+MySQL+Flask 를 이용한 비동기 파일 재배치 프로그램)   
-</h3>
+ (Redis+MySQL+Flask 를 이용한 비동기 파일 재배치 프로그램)</h3>
 
  <div style="text-align: right"> 작성자 : 김지희 </div>
 
