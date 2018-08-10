@@ -4,7 +4,7 @@
  <h3> Relocating File program using Redis+MySQL+Flask+asyncio
  (Redis+MySQL+Flask 를 이용한 비동기 파일 재배치 프로그램)</h3>
 
- <div style="text-align: right"> 작성자 : 김지희 </div>
+<div style="text-align: right"> 작성자 : 김지희 </div>
 
 <br>
 
@@ -42,16 +42,6 @@
 
 
 ### 2. API 기능 설명 및 구현 상세 정보
-
-### 개발 환경
-- OS : ubutu 16.04
-- python==3.6.5
-- MySQL==5.7
-- Flask==1.0.2
-- PyMySQL==0.9.2
-- redis-server==4.0.10
-
-### 프로세스 상세 및 실행 결과
 
 <h4> 1) 컨텐츠 정보 쿼리 및 redis 업데이트(Process step1 ~ step3) </h4>
 
